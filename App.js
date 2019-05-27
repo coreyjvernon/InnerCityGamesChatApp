@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableOpacity, TextInput, View} from 'react-native';
+import {StyleSheet, Text, Alert, TouchableOpacity, TextInput, View} from 'react-native';
+import { blue } from 'ansi-colors';
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -19,7 +20,13 @@ export default class App extends React.Component {
   }
 
   submitForm = () => {
-    alert(this.state.phone + '\n' + this.state.name)
+    if(this.state.phone.length < 10) {
+      Alert.alert('Error', 'Please enter valid number.')
+    }else if (this.state.name.length < 3){
+      Alert.alert('Error', 'Please enter valid name.')
+    }else {
+      alert(this.state.phone + '\n' + this.state.name)
+    }
   }
 
   render() {
@@ -39,7 +46,7 @@ export default class App extends React.Component {
           onChangeText={this.handleChange('name')}
         />
         <TouchableOpacity onPress={this.submitForm}>
-          <Text>Enter</Text>
+          <Text style={styles.btnText}>Enter</Text>
         </TouchableOpacity>
       </View>
     );
@@ -61,4 +68,8 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderRadius: 5,
   },
+  btnText: {
+    color: 'darkblue',
+    fontSize: 20,
+  }
 });
