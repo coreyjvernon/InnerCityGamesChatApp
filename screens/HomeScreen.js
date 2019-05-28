@@ -1,11 +1,26 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { AsyncStorage } from 'react-native';
+import User from '../User'; 
+import styles from '../constants/styles';
 
 export default class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Chats'
+  }
+
+  _logOut = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
+  }
+
   render(){
     return(
-      <View>
-        <Text>Home Screen</Text>
+      <View style={styles.container}>
+        <Text>{User.phone}</Text>
+        <TouchableOpacity onPress={this._logOut}>
+          <Text>Logout</Text>
+        </TouchableOpacity>
       </View>
     )
   }

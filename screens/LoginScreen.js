@@ -1,7 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, Alert, TouchableOpacity, TextInput, View} from 'react-native';
+import {Text, Alert, TouchableOpacity, TextInput, View} from 'react-native';
 import {AsyncStorage} from 'react-native';
-import User from '../User'
+import User from '../User';
+import styles from '../constants/styles';
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -11,6 +12,9 @@ import User from '../User'
 // });
 
 export default class LoginScreen extends React.Component {
+  static navigationOptions = {
+    header: null
+  }
   state= {
     phone: '',
     name: ''
@@ -86,23 +90,4 @@ export default class LoginScreen extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  input: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    width: '90%',
-    marginBottom: 10,
-    borderRadius: 5,
-  },
-  btnText: {
-    color: 'darkblue',
-    fontSize: 20,
-  }
-});
+
