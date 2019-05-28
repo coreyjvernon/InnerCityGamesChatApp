@@ -38,6 +38,17 @@ export default class ChatScreen extends React.Component {
     this.setState({ [key]: val })
   }
 
+  convertTime = (time) => {
+    let d = new Date(time);
+    let c = new Date();
+    let result = (d.getHours() < 10 ? '0' : '') + d.getHours() + ':';
+    result += (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+    if(c.getDay() != d.getDay()){
+      result = d.getDay() + ' ' + d.getMonth() + ' ' + result;
+    }
+    return result;
+  }
+
   sendMessage = async () => {
     if(this.state.textMessage.length > 0){
       let msgId = firebase.database().ref('messages').child(User.phone).child(this.state.person.phone).push().key;
@@ -65,7 +76,7 @@ export default class ChatScreen extends React.Component {
         marginBottom:10,
       }}>
         <Text style={{color: '#fff', padding: 7, fontSize: 16}}>{item.message}</Text>
-        <Text style={{colot: '#eee', padding: 3, fontSize: 12}}>{item.time}</Text>
+        <Text style={{colot: '#eee', padding: 3, fontSize: 12}}>{this.convertTime(item.time)}</Text>
       </View>
     )
   }
@@ -80,14 +91,14 @@ export default class ChatScreen extends React.Component {
           renderItem={this.renderRow}
           keyExtractor={(item, index) => index.toString()}
         />
-        <View style={{flexDirection:'row', alignItems:'center'}}>
+        <View style={{flexDirection:'row', alignItems:'center', marginHorizontal:5}}>
           <TextInput 
             style={styles.input}
             value={this.state.textMessage}
             placeholder='Type message...'
             onChangeText={this.handleChange('textMessage')}
           />
-          <TouchableOpacity onPress={this.sendMessage}>
+          <TouchableOpacity onPress={this.sendMessage} style={{paddingBottom:10, marginLeft:5}}>
             <Text style={styles.btnText}>Send</Text>
           </TouchableOpacity>
         </View>
