@@ -1,13 +1,20 @@
 import React from 'react';
-import { SafeAreaView, View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { SafeAreaView, View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { AsyncStorage } from 'react-native';
 import User from '../User'; 
 import firebase from 'firebase';
 import styles from '../constants/styles';
 
 export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Chats'
+  static navigationOptions = ({navigation}) => {
+    return{
+      title: 'Chats',
+      headerRight: (
+        <TouchableOpacity onPress={()=>navigation.navigate('Profile')}>
+          <Image source={require('../images/man.png')} style={{width:32, heigh:32, marginRight:7}}/>
+        </TouchableOpacity>
+      )
+    }
   }
 
   state = {
