@@ -19,11 +19,15 @@ export default class HomeScreen extends React.Component {
     dbRef.on('child_added', (val)=>{
       let person = val.val()
       person.phone = val.key
-      this.setState((prevState)=>{
-        return {
-          users: [...prevState.users, person]
-        }
-      })
+      if (person.phone === User.phone) {
+        User.name = person.name
+      }else {
+        this.setState((prevState)=>{
+          return {
+            users: [...prevState.users, person]
+          }
+        })
+      }
     })
   }
 
