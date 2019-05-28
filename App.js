@@ -1,8 +1,9 @@
 import React from 'react';
 import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
-import LoginScreen from './screens/LoginScreen'
-import HomeScreen from './screens/HomeScreen'
-import AuthLoadingScreen from './screens/AuthLoadingScreen'
+import LoginScreen from './screens/LoginScreen';
+import HomeScreen from './screens/HomeScreen';
+import AuthLoadingScreen from './screens/AuthLoadingScreen';
+import ChatScreen from './screens/ChatScreen';
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -14,7 +15,7 @@ import AuthLoadingScreen from './screens/AuthLoadingScreen'
 // Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
 // goes here.
 
-const AppStack = createStackNavigator({ Home: HomeScreen});
+const AppStack = createStackNavigator({ Home: HomeScreen, Chat: ChatScreen});
 const AuthStack = createStackNavigator({ Login: LoginScreen });
 
 export default createAppContainer(createSwitchNavigator(
