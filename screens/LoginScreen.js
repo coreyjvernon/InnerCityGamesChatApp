@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, Alert, TouchableOpacity, TextInput, View} from 'react-native';
 import {AsyncStorage} from 'react-native';
 import User from '../User';
+import firebase from 'firebase';
 import styles from '../constants/styles';
 
 // const instructions = Platform.select({
@@ -62,7 +63,8 @@ export default class LoginScreen extends React.Component {
 
       await AsyncStorage.setItem('userPhone', this.state.phone);
       User.phone = this.state.phone
-      this.props.navigation.navigate('App');
+      firebase.database().ref('users/' + User.phone).set({name: this.state.name})
+      this.props.navigation.navigate('App')
     }
   }
 
@@ -86,7 +88,7 @@ export default class LoginScreen extends React.Component {
           <Text style={styles.btnText}>Enter</Text>
         </TouchableOpacity>
       </View>
-    );
+    )
   }
 }
 
