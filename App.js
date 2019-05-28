@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
-import {StyleSheet, Text, Alert, TouchableOpacity, TextInput, View} from 'react-native';
-import { blue } from 'ansi-colors';
+import React from 'react';
+import { createSwitchNavigator, createStackNavigator, createAppContainer } from 'react-navigation';
+import LoginScreen from './screens/LoginScreen'
+import HomeScreen from './screens/HomeScreen'
+import AuthLoadingScreen from './screens/AuthLoadingScreen'
 
 // const instructions = Platform.select({
 //   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -9,67 +11,19 @@ import { blue } from 'ansi-colors';
 //     'Shake or press menu button for dev menu',
 // });
 
-export default class App extends React.Component {
-  state= {
-    phone: '',
-    name: ''
-  }
+// Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
+// goes here.
 
-  handleChange = key => val => {
-    this.setState({ [key]: val })
-  }
+const AppStack = createStackNavigator({ Home: HomeScreen});
+const AuthStack = createStackNavigator({ Login: LoginScreen });
 
-  submitForm = () => {
-    if(this.state.phone.length < 10) {
-      Alert.alert('Error', 'Please enter valid number.')
-    }else if (this.state.name.length < 3){
-      Alert.alert('Error', 'Please enter valid name.')
-    }else {
-      alert(this.state.phone + '\n' + this.state.name)
-    }
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <TextInput 
-          keyboardType='number-pad'
-          placeholder="Phone number"
-          style={styles.input}
-          value={this.state.phone}
-          onChangeText={this.handleChange('phone')}
-        />
-        <TextInput 
-          placeholder="Name"
-          style={styles.input}
-          value={this.state.name}
-          onChangeText={this.handleChange('name')}
-        />
-        <TouchableOpacity onPress={this.submitForm}>
-          <Text style={styles.btnText}>Enter</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+export default createAppContainer(createSwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    App: AppStack,
+    Auth: AuthStack,
   },
-  input: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    width: '90%',
-    marginBottom: 10,
-    borderRadius: 5,
-  },
-  btnText: {
-    color: 'darkblue',
-    fontSize: 20,
+  {
+    initialRouteName: 'AuthLoading',
   }
-});
+));
