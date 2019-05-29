@@ -2,6 +2,7 @@ import React from 'react';
 import { SafeAreaView, View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import User from '../User'; 
 import firebase from 'firebase';
+import styles from '../constants/styles';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -48,6 +49,12 @@ export default class HomeScreen extends React.Component {
   render(){
     return(
       <SafeAreaView>
+        <TouchableOpacity 
+          onPress={() => this.props.navigation.navigate('GroupChat')}
+          style={{alignItems: 'center'}}
+        >
+          <Text style={styles.btnText}>Group Chat</Text>
+      </TouchableOpacity>
         <FlatList 
           data={this.state.users}
           renderItem={this.renderRow}
