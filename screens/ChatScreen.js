@@ -76,7 +76,7 @@ export default class ChatScreen extends React.Component {
         marginBottom:10,
       }}>
         <Text style={{color: '#fff', padding: 7, fontSize: 16}}>{item.message}</Text>
-        <Text style={{colot: '#eee', padding: 3, fontSize: 12}}>{this.convertTime(item.time)}</Text>
+        <Text style={{color: '#eee', padding: 3, fontSize: 12}}>{this.convertTime(item.time)}</Text>
       </View>
     )
   }
