@@ -1,9 +1,7 @@
 import React from 'react';
 import { SafeAreaView, View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
-import { AsyncStorage } from 'react-native';
 import User from '../User'; 
 import firebase from 'firebase';
-import styles from '../constants/styles';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = ({navigation}) => {
@@ -36,11 +34,6 @@ export default class HomeScreen extends React.Component {
         })
       }
     })
-  }
-
-  _logOut = async () => {
-    await AsyncStorage.clear();
-    this.props.navigation.navigate('Auth');
   }
 
   renderRow = ({item}) => {
